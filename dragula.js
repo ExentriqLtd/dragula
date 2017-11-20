@@ -388,6 +388,11 @@ function dragula (initialContainers, options) {
 
     _mirror.style.left = x + 'px';
     _mirror.style.top = y + 'px';
+    
+    // hardware accelerated when possible
+    /*_mirror.style.left = '0px';
+    _mirror.style.top = '0px';
+    _mirror.style.transform = 'translate('+x+'px,'+y+'px)';*/
 
     var item = _copy || _item;
     var elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
