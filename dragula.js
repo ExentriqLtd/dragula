@@ -456,7 +456,8 @@ function dragula (initialContainers, options) {
     classes.rm(_mirror, 'gu-transit');
     classes.add(_mirror, 'gu-mirror');
     o.mirrorContainer.appendChild(_mirror);
-    touchy(documentElement, 'add', 'mousemove', drag);
+    let dragThrottled = _.throttle(drag, 100);
+    touchy(documentElement, 'add', 'mousemove', dragThrottled);
     classes.add(o.mirrorContainer, 'gu-unselectable');
     drake.emit('cloned', _mirror, _item, 'mirror');
   }
@@ -464,7 +465,8 @@ function dragula (initialContainers, options) {
   function removeMirrorImage () {
     if (_mirror) {
       classes.rm(o.mirrorContainer, 'gu-unselectable');
-      touchy(documentElement, 'remove', 'mousemove', drag);
+      let dragThrottled = _.throttle(drag, 100);
+      touchy(documentElement, 'remove', 'mousemove', dragThrottled);
       getParent(_mirror).removeChild(_mirror);
       _mirror = null;
     }
