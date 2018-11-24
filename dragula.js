@@ -388,7 +388,7 @@ function dragula (initialContainers, options) {
 
     _mirror.style.left = x + 'px';
     _mirror.style.top = y + 'px';
-    
+
     // hardware accelerated when possible
     /*_mirror.style.left = '0px';
     _mirror.style.top = '0px';
@@ -535,12 +535,12 @@ function touchy (el, op, type, fn) {
     mousemove: 'MSPointerMove'
   };
   if (global.navigator.pointerEnabled) {
-    crossvent[op](el, pointers[type], fn);
+    crossvent[op](el, pointers[type], fn, { passive: false });
   } else if (global.navigator.msPointerEnabled) {
-    crossvent[op](el, microsoft[type], fn);
+    crossvent[op](el, microsoft[type], fn, { passive: false });
   } else {
-    crossvent[op](el, touch[type], fn);
-    crossvent[op](el, type, fn);
+    crossvent[op](el, touch[type], fn, { passive: false });
+    crossvent[op](el, type, fn, { passive: false });
   }
 }
 
