@@ -27,6 +27,7 @@ function dragula (initialContainers, options) {
   var _grabbed; // holds mousedown context until first mousemove
 
   var o = options || {};
+  if (o.axis === void 0) { o.axis = { x: true, y: true }; }
   if (o.moves === void 0) { o.moves = always; }
   if (o.accepts === void 0) { o.accepts = always; }
   if (o.invalid === void 0) { o.invalid = invalidTarget; }
@@ -386,8 +387,17 @@ function dragula (initialContainers, options) {
     var x = clientX - _offsetX;
     var y = clientY - _offsetY;
 
-    _mirror.style.left = x + 'px';
-    _mirror.style.top = y + 'px';
+    // Restrict axis
+    if(!_mirror.style.left || o.axis.x === true){
+      _mirror.style.left = x + 'px';
+    }
+
+    if(!_mirror.style.top || o.axis.y === true){
+      _mirror.style.top = y + 'px';
+    }
+
+    //_mirror.style.left = x + 'px';
+    //_mirror.style.top = y + 'px';
 
     // hardware accelerated when possible
     /*_mirror.style.left = '0px';
